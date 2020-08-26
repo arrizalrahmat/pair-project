@@ -1,0 +1,23 @@
+accessLevel gw masukin di semua static method buat jaga2 aja siapa tau butuh
+kalo ga butuh ga usah dipake
+
+==General==
+1. kasih navbar biar enak
+
+==loginPost==
+1. kalo username/password salah redirect ke login lagi tapi kasih msg username/password salah
+
+==viewGames==
+1. buat tabel terpisah antara game yg berstatus available dan rented
+2. jika accessLevel session = 'admin' munculin tombol add game, edit dan delete
+3. Jika accessLevel session = 'user' munculin tombol rent
+
+==addGames==
+1. hanya admin yang bisa add game
+2. genre dan platform select option
+
+==editGame==
+1. kasih value yg existing di input formnya
+2. status, genre dan platform select option
+3. hanya admin yang bisa edit
+

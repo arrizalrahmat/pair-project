@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Game</title>
+</head>
+<body>
+    <h1>masuk accessLevel => <%= accessLevel %></h1>
+    <h1>Edit Game</h1>
+    <form action="/games/edit/<%= data.id %>" method="POST">
+    <label for="title">title</label><br>
+    <input type="text" name="name"> <br>
+    <label for="genre">genre</label><br>
+    <input type="text" name="genre"> <br>
+    <label for="platform">platform</label><br>
+    <input type="text" name="platform"> <br>
+    <label for="status">status</label><br>
+    <input type="text" name="status"> <br>
+    <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
