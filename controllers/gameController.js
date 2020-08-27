@@ -109,7 +109,7 @@ class Controller {
                         pass: '1234Lima'
                     }
                 });
-                transporter.sendMail(mailOptions('hacktiv8pi46arrizal@gmail.com', emailUser), (err, data) => {
+                transporter.sendMail(mailOptions('hacktiv8pi46arrizal@gmail.com', 'arrizalrahmat@gmail.com'), (err, data) => {
                     if (err) {
                         res.send('error di sendmail')
                     }
