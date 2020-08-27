@@ -17,7 +17,9 @@ module.exports = (sequelize, DataTypes) => {
   };
   Cart.init({
     rentDate: DataTypes.DATE,
-    returnDate: DataTypes.DATE
+    returnDate: DataTypes.DATE,
+    UserId: DataTypes.INTEGER,
+    GameId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Cart',

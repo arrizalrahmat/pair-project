@@ -20,6 +20,9 @@ class Controller {
                 let flag = bcryptjs.compareSync(req.body.password, data.password)
                 if(flag) {
                     req.session.accessLevel = data.accessLevel
+                    req.session.email = data.email
+                    req.session.idUser = data.id
+                    console.log(`INI DATA ====> ${req.session.idUser}`)
                     res.redirect('/games')
                 }
                 else {
@@ -49,7 +52,7 @@ class Controller {
             address:req.body.address,
             email:req.body.email,
             birthDate:req.body.birthDate,
-            accessLevel:'user'
+            accessLevel:'admin'
         }
         console.log(params)
 

@@ -1,5 +1,7 @@
 const dotenv = require('dotenv').config()
 const { Game, Cart } = require('../models')
+const nodemailer = require('nodemailer')
+const mailOptions = require('../helpers/mailOptions.js')
 
 
 class Controller {
@@ -81,53 +83,47 @@ class Controller {
 
     static rent(req, res) {
         let emailUser = req.session.email
-        let idUser = req.session.id
+        let idUser = req.session.idUser
         let params = {
             status: 'Rented'
         }
         let paramsCart = {
-            userId: idUser,
-            gameId: req.params.id
+            UserId: idUser,
+            GameId: req.params.id
         }
-        
+        console.log(`ini paramsCart => ${paramsCart}`)
+
         Cart.create(paramsCart)
-        .then(data => {
-            Game.update(params, {
-                where: {
-                    id: req.params.id
-                }
-            })
-                .then(data => {
-                    let tranporter = nodemailer.createTransporter({
-                        service: 'gmail',
-                        auth: {
-                            user: process.env.EMAIL,
-                            pass: process.env.PASSWORD
-                        }
-                    });
-                    let mailOptions = {
-                        from: process.env.EMAIL,
-                        to: emailUser,
-                        subject: 'Invoice',
-                        text: 'isi email'
+            .then((data) => {
+                return Game.update(params, {
+                    where: {
+                        id: req.params.id
                     }
-                    transporter.sendMail(mailOptions, (err, data) => {
-                        if(err) {
-                            res.send('error di sendmail')
-                        }
-                        else {
-                            console.log('Invoice Sent!')
-                        }
-                    })
-                    res.redirect('/games')
                 })
-                .catch(err => {
-                    res.send('error di game update')
+            })
+            .then(data => {
+                let transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: {
+                        user: 'hacktiv8pi46arrizal@gmail.com',
+                        pass: '1234Lima'
+                    }
+                });
+                transporter.sendMail(mailOptions('hacktiv8pi46arrizal@gmail.com', emailUser), (err, data) => {
+                    if (err) {
+                        res.send('error di sendmail')
+                    }
+                    else {
+                        console.log('Invoice Sent!')
+                    }
                 })
-        })
-        .catch(err => {
-            res.send('error di cart create')
-        })
+                console.log('MASOK')
+                res.redirect('/games')
+            })
+            .catch(err => {
+                console.log(err)
+                res.send(err)
+            })
     }
 
 }
